@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 5 Boilerplate</title>
+    <style>
+        /* Center the main buttons */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            gap: 20px;
+            position: relative;
+        }
+        /* Style for the buttons */
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        /* Circular button in the top-right corner */
+        .top-right-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #ff6347; /* Tomato color */
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        /* Style for the monkey image */
+        #monkeyImage {
+            display: none; /* Initially hidden */
+            max-width: 300px;
+            max-height: 300px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main buttons for name and background color change -->
+    <button id="nameButton" onclick="reloadPage()">Click me</button>
+    <button id="colorButton" onclick="toggleColorChange()">Change Background Color</button>
+
+    <!-- Circular button for showing a monkey image -->
+    <button class="top-right-button" onclick="showMonkey()">🐒</button>
+
+    <!-- Placeholder for monkey image -->
+    <img id="monkeyImage" src="https://example.com/monkey.jpg" alt="A monkey image" onclick="openMonkeyLink()">
+
+    <script>
+        // Array of colors to cycle through
+        const colors = ["blue", "red", "green", "yellow", "purple", "pink"];
+        let colorIndex = 0;
+        let colorChangeInterval;
+        let colorChanging = false; // Flag to track if color change is active
+
+        // Prompt the user for their name and set it on the button
+        const userName = prompt("Enter your name:");
+        if (userName) {
+            document.getElementById("nameButton").textContent = userName;
+        }
+
+        // Function to reload the page when the button is clicked
+        function reloadPage() {
+            location.reload();
+        }
+
+        // Function to start or stop the color change
+        function toggleColorChange() {
+            if (colorChanging) {
+                clearInterval(colorChangeInterval); // Stop the color change
+                colorChanging = false;
+                document.getElementById("colorButton").textContent = "Change Background Color"; // Update button text
+            } else {
+                colorChangeInterval = setInterval(changeRandomBackgroundColor, 100); // Start fast color change
+                colorChanging = true;
+                document.getElementById("colorButton").textContent = "Stop Background Color"; // Update button text
+            }
+        }
+
+        // Function to change the background color to a random color from the array
+        function changeRandomBackgroundColor() {
+            const randomIndex = Math.floor(Math.random() * colors.length);
+            document.body.style.backgroundColor = colors[randomIndex];
+        }
+
+        // Function to show the monkey image
+        function showMonkey() {
+            const monkeyImage = document.getElementById("monkeyImage");
+            monkeyImage.style.display = "block"; // Show the monkey image
+        }
+
+        // Function to open the monkey link when the image is clicked
+        function openMonkeyLink() {
+            window.open("https://onlyfans.com", "_blank");
+        }
+    </script>
+</body>
+</html>
